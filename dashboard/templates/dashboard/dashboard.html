@@ -1,0 +1,159 @@
+  {% extends 'main.html' %}
+
+  {% block content %}
+  {% include 'navbar.html'  %}
+   <main class="main-content">
+    {% include 'header.html'  %}
+  <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">TOTAL EMPLOYEES</span>
+                        <h2 class="stat-value" id="totalEmployees">1,247</h2>
+                        <span class="stat-change positive">+12% since last month</span>
+                    </div>
+                    <div class="stat-icon blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">PERMANENT STAFF</span>
+                        <h2 class="stat-value" id="permanentStaff">892</h2>
+                        <span class="stat-change positive">+5% since last month</span>
+                    </div>
+                    <div class="stat-icon cyan">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <polyline points="17 11 19 13 23 9"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">CONTRACT STAFF</span>
+                        <h2 class="stat-value" id="contractStaff">355</h2>
+                        <span class="stat-change negative">-2% since last quarter</span>
+                    </div>
+                    <div class="stat-icon orange">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">GENDER RATIO (M/F)</span>
+                        <h2 class="stat-value" id="genderRatio">58% / 42%</h2>
+                        <span class="stat-change neutral">Balanced workforce</span>
+                    </div>
+                    <div class="stat-icon green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+                            <circle cx="19" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-card large">
+                    <div class="chart-header">
+                        <h3>Employee Growth Trend</h3>
+                        <span class="trend-badge positive">+8% this year</span>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Catchment Distribution</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="catchmentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Charts Row -->
+            <div class="charts-row three-col">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Gender Distribution</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Employment Type</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="employmentChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Monthly Hiring</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="hiringChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Staff by Catchment</h3>
+                    <button class="export-btn" id="exportBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Export
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="catchmentTable">
+                        <thead>
+                            <tr>
+                                <th>Catchment</th>
+                                <th>Total Staff</th>
+                                <th>Permanent</th>
+                                <th>Contract</th>
+                                <th>Male</th>
+                                <th>Female</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</main>
+         {% endblock content %}

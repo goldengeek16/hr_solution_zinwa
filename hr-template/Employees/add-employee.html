@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Employee - HR Management</title>
+  <link rel="stylesheet" href="forms.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Header -->
+    <div class="page-header">
+      <h1 class="page-title">Add Employee</h1>
+      <nav class="breadcrumb">
+        <a href="#">Home</a>
+        <span class="breadcrumb-separator">&gt;</span>
+        <span class="breadcrumb-current">Add Employee</span>
+      </nav>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav-links">
+      <a href="add-employee.html" class="nav-link active">Add Employee</a>
+      <a href="add-spouse.html" class="nav-link">Add Spouse</a>
+      <a href="add-children.html" class="nav-link">Add Children</a>
+      <a href="add-next-of-kin.html" class="nav-link">Add Next of Kin</a>
+      <a href="add-qualifications.html" class="nav-link">Add Qualifications</a>
+      <a href="add-clothing.html" class="nav-link">Add Clothing Sizes</a>
+    </nav>
+
+    <form action="#" method="POST">
+     
+
+      <!-- Employee Photo -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Employee Photo</h2>
+        </div>
+        <div class="card-body">
+          <label class="file-upload">
+            <input type="file" name="employee_image" accept="image/*">
+            <div class="file-upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <p class="file-upload-text"><span>Click to upload</span> or drag and drop</p>
+            <p class="file-upload-hint">PNG, JPG or GIF (MAX. 800x400px)</p>
+          </label>
+        </div>
+      </div>
+
+      <!-- Accordion Sections -->
+      <!-- Spouse Details -->
+      <div class="accordion" id="accordion-spouse">
+        <div class="accordion-header" onclick="toggleAccordion('accordion-spouse')">
+          <span class="accordion-title">Spouse Details</span>
+          <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="spouse_name">Full Name</label>
+              <input type="text" id="spouse_name" name="spouse_name" class="form-input" placeholder="Enter spouse name">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="spouse_id_number">ID Number</label>
+              <input type="text" id="spouse_id_number" name="spouse_id_number" class="form-input" placeholder="Enter ID number">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="spouse_dob">Date of Birth</label>
+              <input type="date" id="spouse_dob" name="spouse_dob" class="form-input">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="spouse_occupation">Occupation</label>
+              <input type="text" id="spouse_occupation" name="spouse_occupation" class="form-input" placeholder="Enter occupation">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="date_of_marriage">Date of Marriage</label>
+              <input type="date" id="date_of_marriage" name="date_of_marriage" class="form-input">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="spouse_cell">Cell Number</label>
+              <input type="tel" id="spouse_cell" name="spouse_cell" class="form-input" placeholder="Enter cell number">
+            </div>
+            <div class="form-field form-field-full">
+              <label class="form-label" for="spouse_home_address">Home Address</label>
+              <textarea id="spouse_home_address" name="spouse_home_address" class="form-textarea" placeholder="Enter home address"></textarea>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="spouse_workplace_number">Workplace Number</label>
+              <input type="tel" id="spouse_workplace_number" name="spouse_workplace_number" class="form-input" placeholder="Enter workplace number">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="spouse_workplace_address">Workplace Address</label>
+              <input type="text" id="spouse_workplace_address" name="spouse_workplace_address" class="form-input" placeholder="Enter workplace address">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Children Details -->
+      <div class="accordion" id="accordion-children">
+        <div class="accordion-header" onclick="toggleAccordion('accordion-children')">
+          <span class="accordion-title">Children Details</span>
+          <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div id="children-container">
+            <div class="form-section" data-child-entry>
+              <h4 class="section-title">Child 1</h4>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="child_first_name_1">First Name</label>
+                  <input type="text" id="child_first_name_1" name="children[0][first_name]" class="form-input" placeholder="Enter first name">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="child_surname_1">Surname</label>
+                  <input type="text" id="child_surname_1" name="children[0][surname]" class="form-input" placeholder="Enter surname">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="child_id_number_1">ID Number</label>
+                  <input type="text" id="child_id_number_1" name="children[0][id_number]" class="form-input" placeholder="Enter ID number">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="child_dob_1">Date of Birth</label>
+                  <input type="date" id="child_dob_1" name="children[0][date_of_birth]" class="form-input">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="child_birth_entry_1">Birth Entry Number</label>
+                  <input type="text" id="child_birth_entry_1" name="children[0][birth_entry_number]" class="form-input" placeholder="Enter birth entry number">
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline" onclick="addChildEntry()" style="margin-top: 16px;">+ Add Another Child</button>
+        </div>
+      </div>
+
+      <!-- Next of Kin -->
+      <div class="accordion" id="accordion-nok">
+        <div class="accordion-header" onclick="toggleAccordion('accordion-nok')">
+          <span class="accordion-title">Next of Kin</span>
+          <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="nok_first_name">First Name</label>
+              <input type="text" id="nok_first_name" name="nok_first_name" class="form-input" placeholder="Enter first name">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="nok_surname">Surname</label>
+              <input type="text" id="nok_surname" name="nok_surname" class="form-input" placeholder="Enter surname">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="nok_relationship">Relationship</label>
+              <select id="nok_relationship" name="nok_relationship" class="form-select">
+                <option value="">Select Relationship</option>
+                <option value="parent">Parent</option>
+                <option value="sibling">Sibling</option>
+                <option value="spouse">Spouse</option>
+                <option value="child">Child</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="nok_cell">Cell Number</label>
+              <input type="tel" id="nok_cell" name="nok_cell" class="form-input" placeholder="Enter cell number">
+            </div>
+            <div class="form-field form-field-full">
+              <label class="form-label" for="nok_physical_address">Physical Address</label>
+              <textarea id="nok_physical_address" name="nok_physical_address" class="form-textarea" placeholder="Enter physical address"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clothing Sizes -->
+      <div class="accordion" id="accordion-clothing">
+        <div class="accordion-header" onclick="toggleAccordion('accordion-clothing')">
+          <span class="accordion-title">Clothing Sizes</span>
+          <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <div class="accordion-content">
+          <div class="form-field" style="margin-bottom: 20px;">
+            <label class="form-label">Select Category</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="clothing_category" value="male" checked onchange="toggleClothingSection('male')">
+                Male Clothing
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="clothing_category" value="female" onchange="toggleClothingSection('female')">
+                Female Clothing
+              </label>
+            </div>
+          </div>
+
+          <!-- Male Clothing -->
+          <div id="male-clothing" class="form-grid-3">
+            <div class="form-field">
+              <label class="form-label" for="male_shirt">Shirt</label>
+              <input type="text" id="male_shirt" name="male_shirt" class="form-input" placeholder="e.g., M, L, XL">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="male_trousers">Trousers</label>
+              <input type="text" id="male_trousers" name="male_trousers" class="form-input" placeholder="e.g., 32, 34">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="male_suit">Suit</label>
+              <input type="text" id="male_suit" name="male_suit" class="form-input" placeholder="e.g., 40R">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="male_jacket">Jacket</label>
+              <input type="text" id="male_jacket" name="male_jacket" class="form-input" placeholder="e.g., M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="male_jersey">Jersey</label>
+              <input type="text" id="male_jersey" name="male_jersey" class="form-input" placeholder="e.g., M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="male_tshirt">T-Shirt</label>
+              <input type="text" id="male_tshirt" name="male_tshirt" class="form-input" placeholder="e.g., M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="male_shoes">Shoes</label>
+              <input type="text" id="male_shoes" name="male_shoes" class="form-input" placeholder="e.g., 42, 43">
+            </div>
+          </div>
+
+          <!-- Female Clothing (hidden by default) -->
+          <div id="female-clothing" class="form-grid-3" style="display: none;">
+            <div class="form-field">
+              <label class="form-label" for="female_dress">Dress</label>
+              <input type="text" id="female_dress" name="female_dress" class="form-input" placeholder="e.g., S, M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_blouse">Blouse</label>
+              <input type="text" id="female_blouse" name="female_blouse" class="form-input" placeholder="e.g., S, M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_skirt">Skirt</label>
+              <input type="text" id="female_skirt" name="female_skirt" class="form-input" placeholder="e.g., S, M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_trousers">Trousers</label>
+              <input type="text" id="female_trousers" name="female_trousers" class="form-input" placeholder="e.g., 28, 30">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_jersey">Jersey</label>
+              <input type="text" id="female_jersey" name="female_jersey" class="form-input" placeholder="e.g., S, M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_tshirt">T-Shirt</label>
+              <input type="text" id="female_tshirt" name="female_tshirt" class="form-input" placeholder="e.g., S, M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_shoes">Shoes</label>
+              <input type="text" id="female_shoes" name="female_shoes" class="form-input" placeholder="e.g., 38, 39">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_suit">Suit</label>
+              <input type="text" id="female_suit" name="female_suit" class="form-input" placeholder="e.g., S, M, L">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="female_jacket">Jacket</label>
+              <input type="text" id="female_jacket" name="female_jacket" class="form-input" placeholder="e.g., S, M, L">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-danger">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Accordion toggle
+    function toggleAccordion(id) {
+      const accordion = document.getElementById(id);
+      accordion.classList.toggle('open');
+    }
+
+    // Toggle clothing section
+    function toggleClothingSection(type) {
+      document.getElementById('male-clothing').style.display = type === 'male' ? 'grid' : 'none';
+      document.getElementById('female-clothing').style.display = type === 'female' ? 'grid' : 'none';
+    }
+
+    // Add child entry
+    let childCount = 1;
+    function addChildEntry() {
+      childCount++;
+      const container = document.getElementById('children-container');
+      const template = `
+        <div class="form-section" data-child-entry style="margin-top: 24px;">
+          <h4 class="section-title">Child ${childCount}</h4>
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label">First Name</label>
+              <input type="text" name="children[${childCount - 1}][first_name]" class="form-input" placeholder="Enter first name">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Surname</label>
+              <input type="text" name="children[${childCount - 1}][surname]" class="form-input" placeholder="Enter surname">
+            </div>
+            <div class="form-field">
+              <label class="form-label">ID Number</label>
+              <input type="text" name="children[${childCount - 1}][id_number]" class="form-input" placeholder="Enter ID number">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" name="children[${childCount - 1}][date_of_birth]" class="form-input">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Birth Entry Number</label>
+              <input type="text" name="children[${childCount - 1}][birth_entry_number]" class="form-input" placeholder="Enter birth entry number">
+            </div>
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', template);
+    }
+  </script>
+</body>
+</html>

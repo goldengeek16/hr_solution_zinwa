@@ -1,0 +1,119 @@
+  {% extends 'main.html' %}
+
+  {% block content %}
+  {% include 'navbar.html'  %}
+   <main class="main-content">
+    {% include 'header.html'  %}
+
+<!-- Data Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Permanent Employees</h3>
+                    <div>
+                        
+                    <button class="export-btn" id="">
+                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                              <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg> 
+                        ADD
+                    </button>
+                    
+                  
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Surname</th>
+                                <th>Address</th>
+                                <th>Department</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Catchment</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <!-- Sample Row 1 -->
+                     {% for employees in all_permanent_employees %}
+                    <tr>
+                        <td>{{employees.first_name}}</td>
+                        <td>
+                            <div class="member-info">
+                                <div class="member-details">
+                                    <h4>{{employees.surname}}</h4>
+                                    <p>ID Number : {{employees.id_number}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p>{{employees.home_address}}</p>
+                            <p style="color: #666; font-size: 0.9rem;">Contact: {{employees.contact}}</p>
+                        </td>
+                        <td>{{employees.department}}</td>
+                        <td>{{employees.gender}}</td>
+                        <td>{{employees.email}}</td>
+                        <td><span class="status active">{{employees.catchment}}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href>
+                                    <button class="action-btn save-btn">
+                                 <i class="fas fa-eye"></i> View
+                                    </button> 
+                                    </a>
+
+
+                                    <a href="{% url 'add-permanent-form' %}">
+                                <button class="action-btn edit-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                </a> 
+
+                               <a href>  <button class="action-btn delete-btn">
+                                    <i class="fas fa-trash"></i>Delete
+                                </button>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                    
+
+            </div>
+
+            {% if all_permanent_employees.has_other_pages %}
+
+            <div class="pagination" method="POST" name="page">
+                         <ul class="container">
+                        {% if all_permanent_employees.has_previous  %}
+                     <li><a href="?page={{all_permanent_employees.previous_page_number}}" class="btn page-link">&#10094; Prev</a></li>
+                          {% endif %}
+
+                          {% for page in custom_range %}
+                            {% if page == employees.number %}
+                        <li><a href="?page={{page}}" class="btn page-link btn--sub">{{page}}</a></li>
+                            {% else %}
+                        <li><a href="?page={{page}}" class="btn page-link">{{page}}</a></li>
+                        {% endif %}
+                             {% endfor %}
+
+                             {% if all_permanent_employees.has_next %}
+                                <li><a href="?page={{all_permanent_employees.next_page_number}}" class="btn page-link">NEXT &#10095</a></li>
+
+                             {% endif %}
+
+                    </ul>
+                    </div> 
+
+                {% endif %} 
+
+</main>
+         {% endblock content %}

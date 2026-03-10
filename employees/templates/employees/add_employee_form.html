@@ -1,0 +1,150 @@
+ 
+   {% extends 'main.html' %}
+ 
+  {% block content %}
+  {% include 'navbar.html'  %}
+
+   <main class="main-content">
+    {% include 'header.html'  %}
+ 
+
+ <!-- Personal Information -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Personal Information</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label required" for="surname">Surname</label>
+              <input type="text" id="surname" name="surname" class="form-input" placeholder="Enter surname" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label required" for="fore_names">Fore Names</label>
+              <input type="text" id="fore_names" name="fore_names" class="form-input" placeholder="Enter fore names" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label required" for="gender">Gender</label>
+              <select id="gender" name="gender" class="form-select" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="title">Title</label>
+              <select id="title" name="title" class="form-select">
+                <option value="">Select Title</option>
+                <option value="mr">Mr</option>
+                <option value="mrs">Mrs</option>
+                <option value="ms">Ms</option>
+                <option value="dr">Dr</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label required" for="id_number">ID Number</label>
+              <input type="text" id="id_number" name="id_number" class="form-input" placeholder="Enter ID number" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label required" for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" class="form-input" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="nationality">Nationality</label>
+              <input type="text" id="nationality" name="nationality" class="form-input" placeholder="Enter nationality">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="contact">Contact Number</label>
+              <input type="tel" id="contact" name="contact" class="form-input" placeholder="Enter contact number">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="email">Email Address</label>
+              <div class="input-group">
+                <input type="text" id="email" name="email" class="form-input" placeholder="Enter email">
+                <span class="input-suffix">@example.com</span>
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="drivers_license">Driver's License</label>
+              <input type="text" id="drivers_license" name="drivers_license" class="form-input" placeholder="Enter license number">
+            </div>
+            <div class="form-field form-field-full">
+              <label class="form-label" for="home_address">Home Address</label>
+              <textarea id="home_address" name="home_address" class="form-textarea" placeholder="Enter full home address"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employment Details -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Employment Details</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label required" for="date_of_appointment">Date of Appointment</label>
+              <input type="date" id="date_of_appointment" name="date_of_appointment" class="form-input" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label required" for="current_position">Current Position</label>
+              <input type="text" id="current_position" name="current_position" class="form-input" placeholder="Enter position" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label required" for="department">Department</label>
+              <select id="department" name="department" class="form-select" required>
+                <option value="">Select Department</option>
+                <option value="hr">Human Resources</option>
+                <option value="finance">Finance</option>
+                <option value="it">Information Technology</option>
+                <option value="operations">Operations</option>
+                <option value="sales">Sales</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="catchment">Catchment</label>
+              <input type="text" id="catchment" name="catchment" class="form-input" placeholder="Enter catchment">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="grade">Grade</label>
+              <select id="grade" name="grade" class="form-select">
+                <option value="">Select Grade</option>
+                <option value="1">Grade 1</option>
+                <option value="2">Grade 2</option>
+                <option value="3">Grade 3</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="pension_fund">Pension Fund</label>
+              <input type="text" id="pension_fund" name="pension_fund" class="form-input" placeholder="Enter pension fund">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="station_cell">Station Cell</label>
+              <input type="text" id="station_cell" name="station_cell" class="form-input" placeholder="Enter station cell">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="ec_number">EC Number</label>
+              <input type="text" id="ec_number" name="ec_number" class="form-input" placeholder="Enter EC number">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="nssa_number">NSSA Number</label>
+              <input type="text" id="nssa_number" name="nssa_number" class="form-input" placeholder="Enter NSSA number">
+            </div>
+            <div class="form-field form-field-full">
+              <label class="form-label" for="work_physical_address">Work Physical Address</label>
+              <textarea id="work_physical_address" name="work_physical_address" class="form-textarea" placeholder="Enter work address"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      </div>
+
+     
+
+  </main>
+         {% endblock content %}
