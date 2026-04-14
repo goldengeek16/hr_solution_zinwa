@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>White Simplicity | Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #e9eef3 0%, #dce3ec 100%);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* main card – pure white, crisp, minimal */
+    .login-card {
+      max-width: 440px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+      padding: 2rem 2rem 2.25rem 2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .login-card:hover {
+      box-shadow: 0 28px 40px -16px rgba(0, 0, 0, 0.12);
+    }
+
+    /* header section */
+    .logo-area {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .logo-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f7fb;
+      width: 56px;
+      height: 56px;
+      border-radius: 28px;
+      margin-bottom: 1rem;
+    }
+
+    .logo-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: #2c3e4e;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #1a2a32;
+      margin-bottom: 0.4rem;
+    }
+
+    .greeting {
+      color: #5b6f7e;
+      font-size: 0.95rem;
+      font-weight: 400;
+      border-bottom: 1px solid #eef2f6;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+
+    /* form layout */
+    .login-form {
+      margin-top: 1.8rem;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2c3e4e;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .label-icon {
+      opacity: 0.7;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 1.25rem;
+      transition: all 0.2s ease;
+      outline: none;
+      color: #1e2f3a;
+      font-weight: 450;
+    }
+
+    input:focus {
+      border-color: #9aaebf;
+      box-shadow: 0 0 0 3px rgba(60, 80, 100, 0.08);
+    }
+
+    input::placeholder {
+      color: #bac8d3;
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    /* extra row (forgot + remember) */
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #2f4858;
+    }
+
+    .checkbox-wrapper input {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      padding: 0;
+      accent-color: #2c5f7a;
+    }
+
+    .forgot-link {
+      font-size: 0.85rem;
+      color: #5c6f82;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .forgot-link:hover {
+      color: #1e3b48;
+      text-decoration: underline;
+    }
+
+    /* login button – minimal but crisp */
+    .login-btn {
+      width: 100%;
+      background: #1e2f3c;
+      border: none;
+      padding: 0.9rem 1rem;
+      border-radius: 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .login-btn:hover {
+      background: #10262e;
+      transform: scale(0.98);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .login-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.2rem 0 1.2rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ecf1f5;
+    }
+
+    .divider span {
+      padding: 0 0.8rem;
+      color: #8b9aab;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* demo guest hint – clean & subtle */
+    .guest-hint {
+      background: #fafcfd;
+      border-radius: 1.2rem;
+      padding: 0.65rem 1rem;
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #5f7f92;
+      border: 1px solid #ecf3f8;
+    }
+
+    .guest-hint span {
+      font-family: monospace;
+      background: #f0f4f8;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      margin: 0 0.1rem;
+    }
+
+    /* signup call to action */
+    .signup-prompt {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #5d7384;
+    }
+
+    .signup-prompt a {
+      color: #1f4a5e;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .signup-prompt a:hover {
+      color: #0b2b36;
+      text-decoration: underline;
+    }
+
+    /* simple demo feedback message (non-intrusive) */
+    .demo-toast {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      color: #87a1b5;
+      background: #ffffff;
+      border-radius: 50px;
+      display: inline-block;
+      width: auto;
+      padding: 0.25rem 1rem;
+    }
+
+    /* responsive touch */
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 1.6rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      input {
+        padding: 0.75rem 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="login-card">
+  <div class="logo-area">
+    <div class="logo-icon">
+      <!-- simple minimal lock + user outline, white bg friendly -->
+      <svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v1M5 8h14M7 8v8a2 2 0 002 2h6a2 2 0 002-2V8" />
+        <rect x="8" y="5" width="8" height="3" rx="1" />
+        <circle cx="12" cy="14" r="1.5" fill="white" stroke="currentColor"/>
+        <line x1="12" y1="15.5" x2="12" y2="17" />
+      </svg>
+    </div>
+    <h1>welcome back</h1>
+    <div class="greeting">sign in to your account</div>
+  </div>
+
+  <form class="login-form" id="loginForm" action="#" method="post">
+    <div class="input-group">
+      <label>
+        <span class="label-icon">📧</span> 
+        <span>Email address</span>
+      </label>
+      <input type="email" id="email" name="email" placeholder="hello@company.com" autocomplete="email" required>
+    </div>
+
+    <div class="input-group">
+      <label>
+        <span class="label-icon">🔒</span>
+        <span>Password</span>
+      </label>
+      <input type="password" id="password" name="password" placeholder="··········" autocomplete="current-password" required>
+    </div>
+
+    <div class="form-options">
+      <label class="checkbox-wrapper">
+        <input type="checkbox" id="rememberCheckbox"> 
+        <span>Keep me signed in</span>
+      </label>
+      <a href="#" class="forgot-link" id="forgotLink">Forgot password?</a>
+    </div>
+
+    <button type="submit" class="login-btn">Log in →</button>
+
+    <div class="divider">
+      <span>secure access</span>
+    </div>
+
+    <div class="guest-hint">
+      ⚡ demo preview — try <span>demo@white.com</span> / <span>any</span>
+    </div>
+  </form>
+
+  <div class="signup-prompt">
+    Don’t have an account?<a href="#" id="signupMock">Create account</a>
+  </div>
+  <div id="messageArea" class="demo-toast"></div>
+</div>
+
+<!-- tiny interactive but CSS-focused, just to show feedback without breaking pure style -->
+<script>
+  (function() {
+    // pure vanilla helper to show a subtle message
+    const msgDiv = document.getElementById('messageArea');
+    const form = document.getElementById('loginForm');
+    const forgotBtn = document.getElementById('forgotLink');
+    const signupMock = document.getElementById('signupMock');
+
+    function showMessage(text, isError = false) {
+      if (!msgDiv) return;
+      msgDiv.innerText = text;
+      msgDiv.style.color = isError ? '#c06a4a' : '#5684a1';
+      msgDiv.style.fontWeight = '450';
+      msgDiv.style.opacity = '1';
+      setTimeout(() => {
+        if (msgDiv) msgDiv.innerText = '';
+      }, 2800);
+    }
+
+    // handle login demo (just to show the white card behaviour, no real auth)
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('email');
+        const passInput = document.getElementById('password');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const password = passInput ? passInput.value : '';
+
+        if (email === '') {
+          showMessage('✧ Please enter your email address', true);
+          if (emailInput) emailInput.focus();
+          return;
+        }
+        if (password === '') {
+          showMessage('✧ Password field cannot be empty', true);
+          if (passInput) passInput.focus();
+          return;
+        }
+        if (!email.includes('@') || !email.includes('.')) {
+          showMessage('✧ Use a valid email format (e.g., name@domain.com)', true);
+          return;
+        }
+        // successful mock login – elegant white style demo
+        showMessage(`✓ Welcome back! (demo session for ${email})`, false);
+        // optional: reset form fields? not needed, just demo
+        // you could also clear only after a short delay but we keep clean
+      });
+    }
+
+    // Forgot password demo
+    if (forgotBtn) {
+      forgotBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        showMessage('📬 Password reset link sent to your registered email (demo)', false);
+      });
+    }
+
+    // Signup demo
+    if (signupMock) {
+      signupMock.addEventListener('click', function(e) {
+        e.preventDefault();
+        showMessage('✨ Create new account — coming soon (simple white UI)', false);
+      });
+    }
+
+    // optional: small additional polish – no console noise
+    // prefill demo for easier test? optional but we keep placeholder hint via guest-hint.
+    // to respect 'simple white login page' we don't auto fill but we can add demo helper?
+    // extra: provide demo prefill if user clicks hint? but not needed, clean.
+    const guestHint = document.querySelector('.guest-hint');
+    if (guestHint && !window.location.search) {
+      // just for convenience: double-click hint fills demo? subtle without obtrusion
+      guestHint.style.cursor = 'pointer';
+      guestHint.addEventListener('dblclick', function() {
+        const emailField = document.getElementById('email');
+        const passField = document.getElementById('password');
+        if (emailField && passField) {
+          emailField.value = 'demo@white.com';
+          passField.value = 'demo123';
+          showMessage('🔓 Demo credentials inserted', false);
+        }
+      });
+      // also add title
+      guestHint.title = 'Double-click to insert demo credentials';
+    }
+  })();
+</script>
+</body>
+</html>

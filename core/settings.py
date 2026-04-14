@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=t_6v=yfm=bx5e_w)jqb_x5_3r*0^k$!c_9j%7(+zuq=*fn)6y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.10.1.80','127.0.0.1','localhost']
 
 
 # Application definition
@@ -43,9 +43,13 @@ INSTALLED_APPS = [
 
     'dashboard.apps.DashboardConfig',
     'employees.apps.EmployeesConfig',
+    'users.apps.UsersConfig',
+    'contracts.apps.ContractsConfig',
+    'forms.apps.FormsConfig',
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -136,6 +140,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/uploads')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

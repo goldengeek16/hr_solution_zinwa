@@ -29,7 +29,7 @@ class EmployeeDetailsPermanent(models.Model):
     home_address = models.TextField(max_length=100)
     date_of_appointment = models.DateField()
     current_position = models.CharField(max_length=100)
-    department = models.ManyToManyField('Departments', blank=True)
+    department = models.ManyToManyField('Departments', blank=False,null=False)
     documents = models.FileField(null=True, blank=True)
     catchment = models.CharField(max_length=100, 
                              choices=[
@@ -90,7 +90,8 @@ class EmployeeDetailsContract(models.Model):
                                     ('RUNDE','RUNDE'),
                                   ('MAZOWE','MAZOWE'),
                                   ('SANYATI','SANYATI'),
-                                   ('GWAYI','GWAYI'),                        
+                                   ('GWAYI','GWAYI'),  
+                                   ('HEAD OFFICE','HEAD OFFICE'),                      
                               ])
     grade = models.IntegerField()
     station_cell = models.CharField(max_length=100, blank=True, null=True)
@@ -105,7 +106,7 @@ class EmployeeDetailsContract(models.Model):
 
 class Departments(models.Model):
     name = models.CharField(max_length=20)
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=200 , blank=False, null=False)
     created = models.DateField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 

@@ -10,5 +10,6 @@ from dashboard import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Dashboard, name='dashboard'),
-    path('employees/', include('employees.urls'), name='employees-list')
+    path('employees/', include('employees.urls'), name='employees-list'),
+     path('users/', include('users.urls'), name='profiles'),
 ]
