@@ -1,0 +1,36 @@
+  {% extends 'main.html' %}
+
+  {% block content %}
+  {% include 'navbar.html'  %}
+   <main class="main-content">
+    {% include 'header.html'  %}
+
+<!-- Data Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Permanent Employees' Spouses Details</h3>
+                    <div>
+                        
+                    <button class="export-btn" id="">
+                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                              <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg> 
+                        ADD
+                    </button>
+                    
+                  
+                    </div>
+                </div>
+                
+
+                    <h1>{{spouse_view.first_name}}</h1>
+                    <h1>{{spouse_view.Employee}}</h1><h1>
+
+            </div>
+
+          
+
+</main>
+         {% endblock content %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import EmployeeDetailsPermanent
-from .forms import PermanentEmployeesForm
+from .models import EmployeeDetailsPermanent , SpousesPermanent
+from .forms import PermanentEmployeesForm   
+
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -49,4 +50,16 @@ def addPermanentEmployee(request):
             form.save()
             return redirect('permanent-employee-table')
     return render (request, 'employees/add_employee_form.html')
-   
+
+def spousePermanentTable(request):
+    all_spouses = SpousesPermanent.objects.all()
+    context = { 'all_spouses':all_spouses}
+
+    return render (request, 'employees/spousesTable.html', context)
+
+def spouseView(request,pk):
+
+    spouse_view = SpousesPermanent.objects.get(id=pk)
+    context = {'spouse_view' :spouse_view}
+    return render(request, 'employees/spouses_view.html', context)
+

@@ -1,0 +1,96 @@
+  {% extends 'main.html' %}
+
+  {% block content %}
+  {% include 'navbar.html'  %}
+   <main class="main-content">
+    {% include 'header.html'  %}
+
+<!-- Data Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Permanent Employees' Spouses</h3>
+                    <div>
+                        
+                    <button class="export-btn" id="">
+                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                              <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg> 
+                        ADD
+                    </button>
+                    
+                  
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>First Name</th>
+                                <th>Surname</th>
+                                <th>Occupation</th>
+                                <th>Date of Marriage</th>
+                                <th>Cell Number</th>
+                                <th>Home Address</th>
+                                <th>Action</th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <!-- Sample Row 1 -->
+                     {% for employees in all_spouses %}
+                    <tr>
+                        <td>{{employees.Employee}}</td>
+                        <td>
+                            <div class="member-info">
+                                <div class="member-details">
+                                    <h4>{{employees.first_name}}</h4>
+                                    <p>ID Number : {{employees.id_number}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p>{{employees.surname}}</p>
+                            <p style="color: #666; font-size: 0.9rem;">D.O.B: {{employees.date_of_birth}}</p>
+                        </td>
+                        <td>{{employees.occupation}}</td>
+                        <td>{{employees.date_of_marriage}}</td>
+                        <td>{{employees.cell_number}}</td>
+                         <td>{{employees.home_address}}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{% url 'spouse-view' pk=employees.id %}">
+                                    <button class="action-btn save-btn">
+                                 <i class="fas fa-eye"></i> View
+                                    </button> 
+                                    </a>
+
+
+                                    <a href="">
+                                <button class="action-btn edit-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                </a> 
+
+                               <a href>  <button class="action-btn delete-btn">
+                                    <i class="fas fa-trash"></i>Delete
+                                </button>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                    
+
+            </div>
+
+          
+
+</main>
+         {% endblock content %}
