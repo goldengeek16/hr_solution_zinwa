@@ -7,4 +7,5 @@ urlpatterns = [
     path('add-permanent-form/',views.addPermanentEmployee, name='add-permanent-form'),
     path('spouses-permanent-table/', views.spousePermanentTable, name='spouses-permanent-table'),
     path('spouse-view/<str:pk>/' ,views.spouseView, name='spouse-view'),
+    path('spouse-edit/<str:pk>/' ,views.editSpouseView , name='spouse-edit'),
 ]

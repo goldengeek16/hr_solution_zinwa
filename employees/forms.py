@@ -1,5 +1,5 @@
 from django import forms
-from .models import EmployeeDetailsPermanent
+from .models import EmployeeDetailsPermanent, SpousesPermanent
 from django.forms import ModelForm, widgets
 
 
@@ -14,6 +14,17 @@ class PermanentEmployeesForm(ModelForm):
 
     def __init__( self, *args, **kwargs):
         super(PermanentEmployeesForm,self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class':'input',})
+
+class SpousePermanentForm(ModelForm):
+    class Meta:
+        model = SpousesPermanent
+        fields = '__all__'
+
+    def __init__( self, *args, **kwargs):
+        super(SpousePermanentForm,self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class':'input',})
