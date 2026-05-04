@@ -165,6 +165,7 @@ class NextOfKinPermanent(models.Model):
     surname = models.CharField(max_length=100)
     id_number = models.CharField(max_length=100, unique=True)
     relationship = models.TextField()
+    contact = models.IntegerField()
     created = models.DateField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 

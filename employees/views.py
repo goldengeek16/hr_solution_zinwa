@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import EmployeeDetailsPermanent , SpousesPermanent
+from .models import EmployeeDetailsPermanent , SpousesPermanent, NextOfKinPermanent
 from .forms import PermanentEmployeesForm , SpousePermanentForm
 from django.db.models import Count
 import uuid 
@@ -83,3 +83,17 @@ def editSpouseView(request, pk):
     return render(request, 'employees/edit_spouse.html', context)
 
 
+#-------------------------------NEXT OF KIN ------------------
+# view table
+
+def nextOfKinViewTable(request):
+    all_nextofkin = NextOfKinPermanent.objects.all()
+    context = {'all_nextofkin': all_nextofkin}
+    
+    return render(request, 'employees/next_of_kin_table.html' , context)
+
+def nextOfKinView(request,pk):
+    nextofkin_view = NextOfKinPermanent.objects.get(id=pk)
+    context = {'nextofkin_view':nextofkin_view}
+    
+    return render(request, 'employees/next_of_kin_view.html', context)

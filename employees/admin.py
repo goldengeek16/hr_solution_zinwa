@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import EmployeeDetailsContract,EmployeeDetailsPermanent,SpousesPermanent,ChildrenPermanent,Departments
-from .models import MaleClothingPermanent, FemaleClothingPermanent
+from .models import MaleClothingPermanent, FemaleClothingPermanent, NextOfKinPermanent
 # Register your models here.
 
 
@@ -12,3 +12,4 @@ admin.site.register(ChildrenPermanent)
 admin.site.register(Departments)
 admin.site.register(MaleClothingPermanent)
 admin.site.register(FemaleClothingPermanent)
+admin.site.register(NextOfKinPermanent)
