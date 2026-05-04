@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import EmployeeDetailsPermanent , SpousesPermanent
 from .forms import PermanentEmployeesForm , SpousePermanentForm
+from django.db.models import Count
 import uuid 
 
 
@@ -11,7 +12,10 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Permanent Employees Table.
 def EmployeeTablePermanent(request):
     all_permanent_employees = EmployeeDetailsPermanent.objects.all()
-
+    catchment_counts = EmployeeDetailsPermanent.objects.values('catchment').annotate(
+        count=Count('id')
+    ).order_by('catchment')
+    total_members = EmployeeDetailsPermanent.objects.count()
     page = request.GET.get('page')
     results = 1
     paginator = Paginator(all_permanent_employees, results)
@@ -38,7 +42,7 @@ def EmployeeTablePermanent(request):
       
     custom_range = range(leftIndex, rightIndex)
 
-    context = {'all_permanent_employees':all_permanent_employees, 'paginator':paginator, 'custom_range':custom_range }
+    context = {'all_permanent_employees':all_permanent_employees, 'paginator':paginator, 'custom_range':custom_range,  'catchment_counts': catchment_counts, 'total_members': total_members,}
     return render(request, 'employees/employees_per.html', context)
 
 # Permanent Employees ADD.
