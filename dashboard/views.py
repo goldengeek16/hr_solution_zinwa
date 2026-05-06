@@ -134,6 +134,26 @@ def Chart(request):
         count=Count('id')
     ).order_by('year', 'month')
     
+    #-----------------------------------------------------FUNCTION FOR GENDER EMPLOYEES ------------------------
+
+    # Get gender counts in one query
+    gender_stats = EmployeeDetailsPermanent.objects.values('gender').annotate(
+        count=Count('gender')
+    )
+    
+    # Initialize counts
+    total_male = 0
+    total_female = 0
+    
+    for stat in gender_stats:
+        if stat['gender'] == 'MALE':
+            total_male = stat['count']
+        elif stat['gender'] == 'FEMALE':
+            total_female = stat['count']
+    
+    total_employees = total_male + total_female
+    
+    #------------------------------------------------------------------------------------------------------------
     
     context = {
         'all_employees_data': all_employees_data,
@@ -178,6 +198,12 @@ def Chart(request):
         
         # Optional: all years data
         'all_years_appointments': all_years_appointments,
+        
+        #--------------------------------------------------------------
+        'all_employees_data': all_employees_data,
+        'total_male': total_male,
+        'total_female': total_female,
+        'total_employees': total_employees,
     }
     
   

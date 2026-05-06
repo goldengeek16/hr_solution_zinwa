@@ -7,13 +7,84 @@
    
     
   <!-- Dashboard Content -->
+<div class="dashboard-content">
+  <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">TOTAL EMPLOYEES</span>
+                        <h2 class="stat-value" id="totalEmployees">1,247</h2>
+                        <span class="stat-change positive">+12% since last month</span>
+                    </div>
+                    <div class="stat-icon blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">PERMANENT STAFF</span>
+                        <h2 class="stat-value" id="">{{total_members}}</h2>
+                        <span class="stat-change positive">+5% since last month</span>
+                    </div>
+                    <div class="stat-icon cyan">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <polyline points="17 11 19 13 23 9"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">CONTRACT STAFF</span>
+                        <h2 class="stat-value" id="">0</h2>
+                        <span class="stat-change negative">-2% since last quarter</span>
+                    </div>
+                    <div class="stat-icon orange">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">GENDER RATIO (M/F)</span>
+                        <h2 class="stat-value" id="genderRatio">58% / 42%</h2>
+                        <span class="stat-change neutral">Balanced workforce</span>
+                    </div>
+                    <div class="stat-icon green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+                            <circle cx="19" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+  <div class="charts-row">
+    <div class="chart-card">
+        
    <div class="chart-container1">
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
        
     <div class="stat-card1">
-  <canvas id="myChart" width="600" height="300" style="width: 100%; max-width: 500px; max-height: 300px;"></canvas>
+        <p style="text-align: center;">CATCHMENT DISTRIBUTION</p>
+        <p style="text-align: center;">Total Permanent Employees: {{total_members}}</p>
+    <canvas id="myChart" width="600" height="300" style="width: 100%; max-width: 500px; max-height: 300px;"></canvas>
        
-
+        
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -50,16 +121,63 @@
  </div>
  </div>
 
- <!-- ----------------------------------------------------------------------------------------------------- -->
+ 
+
+<!-- ----------------------------------------------GENDER RATIO ------------------------------------------------------ -->
   <div class="chart-container1">
     <div class="stat-card1">
+        <p style="text-align: center;">GENDER DISTRIBUTION</p>
         <div>
-  <canvas id="myChart1"></canvas>
+  <canvas id="myChart2" width="600" height="300" style="width: 100%; max-width: 500px; max-height: 300px;"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
+      <script>
+  const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ['MALE', 'FEMALE',],
+      datasets: [{
+        label: 'GENDER DISTRIBUTION ',
+        data: [{{total_male}},{{total_female}}],
+        backgroundColor: [
+                            '#1C5CAF',
+                            '#3392EB',
+                        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+      </script>
+
+          </div>
+        </div>
+
+        </div>
+<!-- -----------------------------------------------MONTHLY EMPLOYMENT ------------------------------------------------------ -->
+ 
+  <div>
+    
+    <div class="stat-card2">
+      
+        
+        <div>
+    <canvas id="myChart1" width="600" height="800" style="width: 100%; max-width: 1500px; max-height: 1100px;"></canvas>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
   const ctx1 = document.getElementById('myChart1');
 
   new Chart(ctx1, {
@@ -89,11 +207,10 @@
       }
     }
   });
-</script>
+      </script>
 
-    </div>
-  </div>
- 
+        </div>
+      </div>
             <style>
     .chart-container1 {
         display: flex;
@@ -101,17 +218,45 @@
         align-items: left;
         padding: 20px;
     }
+    .chart-container2 {
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        padding: 20px;
+    }
     
     .stat-card1 {
-        width: 60%;  /* Adjust this value: 50%, 60%, 70%, etc. */
+        width: 40%;  /* Adjust this value: 50%, 60%, 70%, etc. */
         max-width: 500px;  /* Maximum width */
-        min-width: 300px;   /* Minimum width */
-        /* margin: 0 auto; */
+        min-width: 500px;   /* Minimum width */
+        margin: 0 ; 
         background: white;
         border-radius: 8px;
         padding: 20px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
     }
+
+    .stat-card2 {
+        width: 40%;  /* Adjust this value: 50%, 60%, 70%, etc. */
+        max-width: 1500px;  /* Maximum width */
+        min-width: 900px;   /* Minimum width */
+        margin: 0 auto ; 
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
+    }
+    .stats-grid1 {
+       
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        /* Or for fixed columns: */
+        /* grid-template-columns: 1fr 1fr 1fr; */
+        gap: 0px;
+            /* Optional: space between items */
+      }
     
     /* For smaller screens */
     @media (max-width: 768px) {
@@ -120,6 +265,7 @@
         }
     }
 </style>
-        
+        </div>
+        </div>
 </main>
          {% endblock content %}
