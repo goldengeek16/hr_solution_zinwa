@@ -9,7 +9,7 @@ from dashboard import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.Chart1, name='dashboard'),
+    path('', views.Chart, name='dashboard'),
     path('dashboard/', include('dashboard.urls'),name='charts'),
     path('employees/', include('employees.urls'), name='employees-list'),
      path('users/', include('users.urls'), name='profiles'),
