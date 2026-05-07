@@ -1,0 +1,195 @@
+.spouses-page {
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px 30px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+}
+
+.spouses-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.spouses-header h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.spouses-header p {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.add-spouse-btn {
+    background: #0b70b7;
+    color: #fff;
+    border-radius: 8px;
+    padding: 12px 22px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.add-spouse-btn:hover {
+    background: #075f9d;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.spouses-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+.spouses-table thead {
+    background: #f8fafc;
+}
+
+.spouses-table th {
+    color: #52677f;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: left;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.spouses-table td {
+    color: #0f172a;
+    font-size: 14px;
+    padding: 20px;
+    border-bottom: 1px solid #eef2f7;
+    vertical-align: middle;
+}
+
+.spouses-table tbody tr:hover {
+    background: #f8fbff;
+}
+
+.person-cell {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 230px;
+}
+
+.initials-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0b70b7, #38bdf8);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.person-cell strong {
+    display: block;
+    color: #0f172a;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.person-cell span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.address-cell {
+    max-width: 280px;
+    line-height: 1.6;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-btn {
+    border-radius: 6px;
+    padding: 7px 10px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.view-btn {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.edit-btn {
+    background: #ecfdf5;
+    color: #16a34a;
+}
+
+.delete-btn {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px;
+    color: #0f172a;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #64748b;
+}
+
+@media (max-width: 700px) {
+    .spouses-page {
+        padding: 22px 18px;
+    }
+
+    .spouses-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .add-spouse-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.spouse-name-cell strong {
+    display: block;
+    color: #0f172a;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.spouse-name-cell span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.4;
+}
+

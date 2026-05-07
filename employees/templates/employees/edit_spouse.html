@@ -1,40 +1,97 @@
- 
-   {% extends 'main.html' %}
- 
-  {% block content %}
-  {% include 'navbar.html'  %}
+{% extends 'main.html' %}
+{% load static %}
 
-   <main class="main-content">
-    {% include 'header.html'  %}
- 
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/edit_spouse.css' %}">
 
- <!-- Personal Information -->
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">Edit Spouse Personal Information</h2>
-        </div>
-        
-        <form class="form" method="POST" enctype="multipart/form-data">
+{% include 'navbar.html' %}
 
-            {% csrf_token %}
+<main class="main-content">
+    {% include 'header.html' %}
 
-            {% for field in form %}
+    <form class="spouse-form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-            <div class="">
-                <div class="form-group">
-                    <label>{{field.label}}</label>
-                    {{field}}
-                </div>
-
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Edit Spouse Personal Information</h2>
             </div>
-            {% endfor %}
-        </form>
 
+            <div class="card-body">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.Employee.id_for_label }}">Employee</label>
+                        {{ form.Employee }}
+                        {{ form.Employee.errors }}
+                    </div>
 
-     
-      </div>
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.first_name.id_for_label }}">First Name</label>
+                        {{ form.first_name }}
+                        {{ form.first_name.errors }}
+                    </div>
 
-     
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.surname.id_for_label }}">Surname</label>
+                        {{ form.surname }}
+                        {{ form.surname.errors }}
+                    </div>
 
-  </main>
-         {% endblock content %}
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.id_number.id_for_label }}">ID Number</label>
+                        {{ form.id_number }}
+                        {{ form.id_number.errors }}
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.date_of_birth.id_for_label }}">Date of Birth</label>
+                        {{ form.date_of_birth }}
+                        {{ form.date_of_birth.errors }}
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.occupation.id_for_label }}">Occupation</label>
+                        {{ form.occupation }}
+                        {{ form.occupation.errors }}
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.date_of_marriage.id_for_label }}">Date of Marriage</label>
+                        {{ form.date_of_marriage }}
+                        {{ form.date_of_marriage.errors }}
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label required" for="{{ form.cell_number.id_for_label }}">Cell Number</label>
+                        {{ form.cell_number }}
+                        {{ form.cell_number.errors }}
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label" for="{{ form.workplace_number.id_for_label }}">Workplace Number</label>
+                        {{ form.workplace_number }}
+                        {{ form.workplace_number.errors }}
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label" for="{{ form.workplace_address.id_for_label }}">Workplace Address</label>
+                        {{ form.workplace_address }}
+                        {{ form.workplace_address.errors }}
+                    </div>
+
+                    <div class="form-field form-field-full">
+                        <label class="form-label required" for="{{ form.home_address.id_for_label }}">Home Address</label>
+                        {{ form.home_address }}
+                        {{ form.home_address.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a href="{% url 'spouses-permanent-table' %}" class="cancel-btn">Cancel</a>
+            <button type="submit" class="save-btn">Save Changes</button>
+        </div>
+    </form>
+</main>
+{% endblock content %}

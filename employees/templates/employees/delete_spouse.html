@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/delete_spouse.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="delete-page">
+        <div class="delete-card">
+
+            <h2>Delete Spouse Record?</h2>
+
+            <p>
+                Are you sure you want to delete
+                <strong>{{ spouse.first_name }} {{ spouse.surname }}</strong>?
+                This action cannot be undone.
+            </p>
+
+            <div class="spouse-preview">
+                <span>Employee</span>
+                <strong>{{ spouse.Employee }}</strong>
+
+                <span>ID Number</span>
+                <strong>{{ spouse.id_number }}</strong>
+
+                <span>Cell Number</span>
+                <strong>{{ spouse.cell_number }}</strong>
+            </div>
+
+            <div class="delete-actions">
+                <a href="{% url 'spouses-permanent-table' %}" class="cancel-delete-btn">
+                    Cancel
+                </a>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="confirm-delete-btn">
+                        Yes, Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

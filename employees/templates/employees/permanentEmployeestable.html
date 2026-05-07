@@ -1,0 +1,128 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/permanent_employees_table.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="employees-page">
+        <div class="employees-header">
+            <div>
+                <h2>Permanent Employees</h2>
+                <p>Manage permanent employee records.</p>
+            </div>
+
+            <a href="{% url 'add-permanent-form' %}" class="add-employee-btn">
+                ADD
+            </a>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="employees-table">
+                <thead>
+                    <tr>
+                        <th>E.C Number</th>
+                        <th>Employee</th>
+                        <th>Job Title</th>
+                        <th>Catchment</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for employee in all_permanent_employees %}
+                    <tr>
+                        <td>{{ employee.ec_number }}</td>
+
+                        <td>
+                            <div class="employee-name-cell">
+                                <strong>{{ employee.title }} {{ employee.first_name }} {{ employee.surname }}</strong>
+                                <span>ID Number: {{ employee.id_number }}</span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <center>
+                            <div class="job-cell">
+                                <strong>{{ employee.current_position }}</strong>
+                                <span>
+                                    {% for department in employee.department.all %}
+                                        {{ department }}{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                        
+                                    {% endfor %}
+                                </span>
+                            </div>
+                            </center>
+                        </td>
+
+                        <td>
+                            <span class="catchment-badge">{{ employee.catchment }}</span>
+                        </td>
+
+                        <td>
+                            <div class="contact-cell">
+                                <strong>{{ employee.home_address }}</strong>
+                                <span>Contact: {{ employee.contact }}</span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{% url 'permanent-employee-view' employee.id %}" class="action-btn view-btn">View</a>
+                                <a href="{% url 'edit-permanent-employee' employee.id %}" class="action-btn edit-btn">Edit</a>
+                                <a href="{% url 'delete-permanent-employee' employee.id %}" class="action-btn delete-btn">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <h3>No permanent employees found</h3>
+                                <p>Click ADD to create the first employee record.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if all_permanent_employees.has_other_pages %}
+        <div class="pagination">
+            <ul class="container">
+                {% if all_permanent_employees.has_previous %}
+                <li>
+                    <a href="?page={{ all_permanent_employees.previous_page_number }}" class="btn page-link">&#10094; Prev</a>
+                </li>
+                {% endif %}
+
+                {% for page in custom_range %}
+                    {% if page == all_permanent_employees.number %}
+                    <li>
+                        <a href="?page={{ page }}" class="btn page-link btn--sub">{{ page }}</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="?page={{ page }}" class="btn page-link">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if all_permanent_employees.has_next %}
+                <li>
+                    <a href="?page={{ all_permanent_employees.next_page_number }}" class="btn page-link">Next &#10095;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+    </section>
+</main>
+{% endblock content %}

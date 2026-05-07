@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/permanent_employee_form.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <form class="employee-form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Add Permanent Employee</h2>
+            </div>
+
+            <div class="card-body">
+                <div class="form-grid">
+                    {% for field in form %}
+                    <div class="form-field {% if field.name == 'home_address' or field.name == 'work_physical_address' or field.name == 'department' %}form-field-full{% endif %}">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a href="{% url 'permanent-employee-table' %}" class="cancel-btn">Cancel</a>
+            <button type="submit" class="save-btn">Save Employee</button>
+        </div>
+    </form>
+</main>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/permanent_employee_delete.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="delete-page">
+        <div class="delete-card">
+
+            <h2>Delete Employee Record?</h2>
+
+            <p>
+                Are you sure you want to delete
+                <strong>{{ employee.title }} {{ employee.first_name }} {{ employee.surname }}</strong>?
+                This action cannot be undone.
+            </p>
+
+            <div class="employee-preview">
+                <span>E.C Number</span>
+                <strong>{{ employee.ec_number }}</strong>
+
+                <span>ID Number</span>
+                <strong>{{ employee.id_number }}</strong>
+
+                <span>Position</span>
+                <strong>{{ employee.current_position }}</strong>
+            </div>
+
+            <div class="delete-actions">
+                <a href="{% url 'permanent-employee-table' %}" class="cancel-delete-btn">Cancel</a>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="confirm-delete-btn">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

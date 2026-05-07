@@ -1,96 +1,80 @@
-  {% extends 'main.html' %}
+{% extends 'main.html' %}
+{% load static %}
 
-  {% block content %}
-  {% include 'navbar.html'  %}
-   <main class="main-content">
-    {% include 'header.html'  %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/spouses_table.css' %}">
 
-<!-- Data Table -->
-            <div class="table-card">
-                <div class="table-header">
-                    <h3>Permanent Employees' Spouses</h3>
-                    <div>
-                        
-                    <button class="export-btn" id="">
-                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                              <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg> 
-                        ADD
-                    </button>
-                    
-                  
-                    </div>
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Employee Name</th>
-                                <th>First Name</th>
-                                <th>Surname</th>
-                                <th>Occupation</th>
-                                <th>Date of Marriage</th>
-                                <th>Cell Number</th>
-                                <th>Home Address</th>
-                                <th>Action</th>
-                              
-                            </tr>
-                        </thead>
-                        <tbody>
-                           <!-- Sample Row 1 -->
-                     {% for employees in all_spouses %}
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="spouses-page">
+        <div class="spouses-header">
+            <div>
+                <h2>Permanent Employees' Spouses</h2>
+                <p>Manage spouse records.</p>
+            </div>
+
+           <a href="{% url 'add-spouse' %}" class="add-spouse-btn">
+    ADD
+</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="spouses-table">
+                <thead>
                     <tr>
-                        <td>{{employees.Employee}}</td>
+                        <th>Spouse</th>
+                        <th>Employee</th>
+                        <th>Occupation</th>
+                        <th>Date of Marriage</th>
+                        <th>Cell Number</th>
+                        <th>Home Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for spouse in spouses %}
+                    <tr>
                         <td>
-                            <div class="member-info">
-                                <div class="member-details">
-                                    <h4>{{employees.first_name}}</h4>
-                                    <p>ID Number : {{employees.id_number}}</p>
+
+                                <div>
+                                    <strong>{{ spouse.first_name }} {{ spouse.surname }}</strong>
+                                    <br
+                                    <span>ID Number: {{ spouse.id_number }}</span>
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <p>{{employees.surname}}</p>
-                            <p style="color: #666; font-size: 0.9rem;">D.O.B: {{employees.date_of_birth}}</p>
-                        </td>
-                        <td>{{employees.occupation}}</td>
-                        <td>{{employees.date_of_marriage}}</td>
-                        <td>{{employees.cell_number}}</td>
-                         <td>{{employees.home_address}}</td>
+
+                        <td>{{ spouse.Employee }}</td>
+                        <td>{{ spouse.occupation }}</td>
+                        <td>{{ spouse.date_of_marriage }}</td>
+                        <td>{{ spouse.cell_number }}</td>
+                        <td class="address-cell">{{ spouse.home_address }}</td>
+
                         <td>
                             <div class="action-buttons">
-                                <a href="{% url 'spouse-view' pk=employees.id %}">
-                                    <button class="action-btn save-btn">
-                                 <i class="fas fa-eye"></i> View
-                                    </button> 
-                                    </a>
-
-
-                                    <a href="{% url 'spouse-edit' pk=employees.id %}">
-                                <button class="action-btn edit-btn">
-                                    <i class="fas fa-edit"></i> Edit
-                                </button>
-                                </a> 
-
-                               <a href>  <button class="action-btn delete-btn">
-                                    <i class="fas fa-trash"></i>Delete
-                                </button>
-                                </a>
+                                <a href="{% url 'spouse-view' spouse.id %}" class="action-btn view-btn">View</a>
+                                <a href="{% url 'spouse-edit' spouse.id %}" class="action-btn edit-btn">Edit</a>
+                                <a href="{% url 'delete-spouse' spouse.id %}" class="action-btn delete-btn">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <h3>No spouses added yet</h3>
+                                <p>Click ADD to create the first spouse record.</p>
                             </div>
                         </td>
                     </tr>
                     {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
-                    
-
-            </div>
-
-          
-
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
-         {% endblock content %}
+{% endblock content %}

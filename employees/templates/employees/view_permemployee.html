@@ -1,0 +1,81 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/permanent_employee_view.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="profile-page">
+        <div class="profile-topbar">
+            <div class="profile-title">
+                <h3>Employee Profile</h3>
+            </div>
+
+            <a href="{% url 'edit-permanent-employee' employee.id %}" class="edit-btn">Edit</a>
+        </div>
+
+        <div class="profile-summary">
+            {% if employee.employee_image %}
+            <img src="{{ employee.employee_image.url }}" alt="Employee image" class="profile-image">
+            {% else %}
+            <div class="profile-initials">
+                {{ employee.first_name|first }}{{ employee.surname|first }}
+            </div>
+            {% endif %}
+
+            <div class="profile-main-info">
+                <div class="name-row">
+                    <h2>{{ employee.title }} {{ employee.first_name }} {{ employee.surname }}</h2>
+                    <span class="status-badge">{{ employee.catchment }}</span>
+                </div>
+
+                <p>{{ employee.current_position }}</p>
+                <p>E.C Number: {{ employee.ec_number }}</p>
+                <p>ID Number: {{ employee.id_number }}</p>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <div class="section-label">Personal Details</div>
+
+            <div class="details-grid">
+                <div class="detail-item"><span>Gender</span><strong>{{ employee.gender }}</strong></div>
+                <div class="detail-item"><span>Date of Birth</span><strong>{{ employee.date_of_birth }}</strong></div>
+                <div class="detail-item"><span>Nationality</span><strong>{{ employee.nationality }}</strong></div>
+                <div class="detail-item"><span>Contact</span><strong>{{ employee.contact }}</strong></div>
+                <div class="detail-item"><span>Email</span><strong>{{ employee.email|default:"N/A" }}</strong></div>
+                <div class="detail-item"><span>Driver's License</span><strong>{{ employee.drivers_license|default:"N/A" }}</strong></div>
+                <div class="detail-item full-width"><span>Home Address</span><strong>{{ employee.home_address }}</strong></div>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <div class="section-label">Employment Details</div>
+
+            <div class="details-grid">
+                <div class="detail-item"><span>Date of Appointment</span><strong>{{ employee.date_of_appointment }}</strong></div>
+                <div class="detail-item"><span>Current Position</span><strong>{{ employee.current_position }}</strong></div>
+                <div class="detail-item"><span>Grade</span><strong>{{ employee.grade }}</strong></div>
+                <div class="detail-item"><span>Pension Fund</span><strong>{{ employee.pension_fund }}</strong></div>
+                <div class="detail-item"><span>NSSA Number</span><strong>{{ employee.nssa_number|default:"N/A" }}</strong></div>
+                <div class="detail-item"><span>Station Cell</span><strong>{{ employee.station_cell|default:"N/A" }}</strong></div>
+                <div class="detail-item full-width">
+                    <span>Department</span>
+                    <strong>
+                        {% for department in employee.department.all %}
+                            {{ department }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            N/A
+                        {% endfor %}
+                    </strong>
+                </div>
+                <div class="detail-item full-width"><span>Work Physical Address</span><strong>{{ employee.work_physical_address|default:"N/A" }}</strong></div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}
