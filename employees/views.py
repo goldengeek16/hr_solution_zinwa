@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import EmployeeDetailsPermanent , SpousesPermanent, NextOfKinPermanent
-from .forms import PermanentEmployeesForm , SpousePermanentForm
+from .models import EmployeeDetailsPermanent , SpousesPermanent, NextOfKinPermanent, EmployeeDocument
+from .forms import EmployeeDocumentFormSet, PermanentEmployeesForm , SpousePermanentForm
 from django.db.models import Count
 import uuid 
 
@@ -58,50 +58,129 @@ def EmployeeTablePermanent(request):
 
 def addPermanentEmployee(request):
     form = PermanentEmployeesForm()
+    document_formset = EmployeeDocumentFormSet(
+        queryset=EmployeeDocument.objects.none(),
+        prefix='documents'
+    )
+    spouse_form = SpousePermanentForm(prefix='spouse')
 
     if request.method == 'POST':
         form = PermanentEmployeesForm(request.POST, request.FILES)
+        document_formset = EmployeeDocumentFormSet(
+            request.POST,
+            request.FILES,
+            queryset=EmployeeDocument.objects.none(),
+            prefix='documents'
+        )
+        spouse_form = SpousePermanentForm(request.POST, prefix='spouse')
 
-        if form.is_valid():
-            form.save()
+        spouse_has_data = any(
+            request.POST.get(f'spouse-{field}')
+            for field in spouse_form.fields
+        )
+
+        forms_are_valid = form.is_valid() and document_formset.is_valid()
+
+        if spouse_has_data:
+            forms_are_valid = forms_are_valid and spouse_form.is_valid()
+
+        if forms_are_valid:
+            employee = form.save()
+
+            for doc_form in document_formset:
+                if doc_form.cleaned_data and not doc_form.cleaned_data.get('DELETE'):
+                    document = doc_form.save(commit=False)
+                    document.employee = employee
+                    document.save()
+
+            if spouse_has_data:
+                spouse = spouse_form.save(commit=False)
+                spouse.Employee = employee
+                spouse.save()
+
             return redirect('permanent-employee-table')
 
     context = {
         'form': form,
+        'document_formset': document_formset,
+        'spouse_form': spouse_form,
     }
 
     return render(request, 'employees/add_permemployee.html', context)
 
 
-def permanentEmployeeView(request, pk):
-    employee = get_object_or_404(EmployeeDetailsPermanent, id=pk)
-
-    context = {
-        'employee': employee,
-    }
-
-    return render(request, 'employees/view_permemployee.html', context)
-
-
 def editPermanentEmployee(request, pk):
     employee = get_object_or_404(EmployeeDetailsPermanent, id=pk)
+    spouse = SpousesPermanent.objects.filter(Employee=employee).first()
+
+    form = PermanentEmployeesForm(instance=employee)
+    document_formset = EmployeeDocumentFormSet(
+        queryset=EmployeeDocument.objects.filter(employee=employee),
+        prefix='documents'
+    )
+    spouse_form = SpousePermanentForm(instance=spouse, prefix='spouse')
 
     if request.method == 'POST':
         form = PermanentEmployeesForm(request.POST, request.FILES, instance=employee)
+        document_formset = EmployeeDocumentFormSet(
+            request.POST,
+            request.FILES,
+            queryset=EmployeeDocument.objects.filter(employee=employee),
+            prefix='documents'
+        )
+        spouse_form = SpousePermanentForm(request.POST, instance=spouse, prefix='spouse')
 
-        if form.is_valid():
-            form.save()
+        spouse_has_data = any(
+            request.POST.get(f'spouse-{field}')
+            for field in spouse_form.fields
+        )
+
+        forms_are_valid = form.is_valid() and document_formset.is_valid()
+
+        if spouse_has_data:
+            forms_are_valid = forms_are_valid and spouse_form.is_valid()
+
+        if forms_are_valid:
+            employee = form.save()
+
+            for doc_form in document_formset:
+                if doc_form.cleaned_data:
+                    if doc_form.cleaned_data.get('DELETE') and doc_form.instance.id:
+                        doc_form.instance.delete()
+                    elif doc_form.cleaned_data.get('document_file'):
+                        document = doc_form.save(commit=False)
+                        document.employee = employee
+                        document.save()
+
+            if spouse_has_data:
+                spouse_record = spouse_form.save(commit=False)
+                spouse_record.Employee = employee
+                spouse_record.save()
+
             return redirect('permanent-employee-table')
-    else:
-        form = PermanentEmployeesForm(instance=employee)
 
     context = {
         'form': form,
         'employee': employee,
+        'document_formset': document_formset,
+        'spouse_form': spouse_form,
     }
 
     return render(request, 'employees/edit_permemployee.html', context)
 
+
+def permanentEmployeeView(request, pk):
+    employee = get_object_or_404(EmployeeDetailsPermanent, id=pk)
+    documents = EmployeeDocument.objects.filter(employee=employee)
+    spouses = SpousesPermanent.objects.filter(Employee=employee)
+
+    context = {
+        'employee': employee,
+        'documents': documents,
+        'spouses': spouses,
+    }
+
+    return render(request, 'employees/view_permemployee.html', context)
 
 def deletePermanentEmployee(request, pk):
     employee = get_object_or_404(EmployeeDetailsPermanent, id=pk)

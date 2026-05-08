@@ -77,5 +77,46 @@
             </div>
         </div>
     </section>
+
+    <div class="details-section">
+    <div class="section-label">Documents</div>
+
+    <div class="documents-list">
+        {% for document in documents %}
+        <div class="document-item">
+            <div>
+                <strong>{{ document.get_document_type_display }}</strong>
+                {% if document.certificate_name %}
+                <span>{{ document.certificate_name }}</span>
+                {% endif %}
+            </div>
+
+            <a href="{{ document.document_file.url }}" target="_blank" class="document-link">
+                View Document
+            </a>
+        </div>
+        {% empty %}
+        <p class="muted-text">No documents attached.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="details-section">
+    <div class="section-label">Spouse Details</div>
+
+    {% for spouse in spouses %}
+    <div class="details-grid">
+        <div class="detail-item"><span>Name</span><strong>{{ spouse.first_name }} {{ spouse.surname }}</strong></div>
+        <div class="detail-item"><span>ID Number</span><strong>{{ spouse.id_number }}</strong></div>
+        <div class="detail-item"><span>Occupation</span><strong>{{ spouse.occupation }}</strong></div>
+        <div class="detail-item"><span>Cell Number</span><strong>{{ spouse.cell_number }}</strong></div>
+        <div class="detail-item"><span>Date of Marriage</span><strong>{{ spouse.date_of_marriage }}</strong></div>
+        <div class="detail-item full-width"><span>Home Address</span><strong>{{ spouse.home_address }}</strong></div>
+    </div>
+    {% empty %}
+    <p class="muted-text">No spouse details added.</p>
+    {% endfor %}
+</div>
+
 </main>
 {% endblock content %}

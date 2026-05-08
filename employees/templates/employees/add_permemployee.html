@@ -30,10 +30,109 @@
             </div>
         </div>
 
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Attach Documents</h2>
+                <p>Select the document type and upload the file. For academic documents, enter the certificate name.</p>
+            </div>
+
+            <div class="card-body">
+                {{ document_formset.management_form }}
+
+                <div id="document-forms">
+                    {% for doc_form in document_formset %}
+                    <div class="document-row">
+                        <div class="form-field">
+                            <label class="form-label">Document Type</label>
+                            {{ doc_form.document_type }}
+                            {{ doc_form.document_type.errors }}
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Certificate Name</label>
+                            {{ doc_form.certificate_name }}
+                            {{ doc_form.certificate_name.errors }}
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Document File</label>
+                            {{ doc_form.document_file }}
+                            {{ doc_form.document_file.errors }}
+                        </div>
+
+                        {% if doc_form.DELETE %}
+                        <div class="form-field delete-check">
+                            <label class="form-label">Remove</label>
+                            {{ doc_form.DELETE }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button type="button" class="secondary-btn" id="add-document-btn">
+                    Add Another Document
+                </button>
+
+                <div id="empty-document-form" style="display: none;">
+                    <div class="document-row">
+                        <div class="form-field">
+                            <label class="form-label">Document Type</label>
+                            {{ document_formset.empty_form.document_type }}
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Certificate Name</label>
+                            {{ document_formset.empty_form.certificate_name }}
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Document File</label>
+                            {{ document_formset.empty_form.document_file }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Spouse Details</h2>
+                <p>Optional. Add spouse details now or later from the spouse records page.</p>
+            </div>
+
+            <div class="card-body">
+                <div class="form-grid">
+                    {% for field in spouse_form %}
+                    <div class="form-field {% if field.name == 'home_address' %}form-field-full{% endif %}">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
         <div class="form-actions">
             <a href="{% url 'permanent-employee-table' %}" class="cancel-btn">Cancel</a>
             <button type="submit" class="save-btn">Save Employee</button>
         </div>
     </form>
+
+    <script>
+        const addDocumentBtn = document.getElementById('add-document-btn');
+        const documentForms = document.getElementById('document-forms');
+        const emptyDocumentForm = document.getElementById('empty-document-form');
+        const totalForms = document.getElementById('id_documents-TOTAL_FORMS');
+
+        addDocumentBtn.addEventListener('click', function () {
+            const formIndex = parseInt(totalForms.value);
+            const newFormHtml = emptyDocumentForm.innerHTML.replaceAll('__prefix__', formIndex);
+
+            documentForms.insertAdjacentHTML('beforeend', newFormHtml);
+            totalForms.value = formIndex + 1;
+        });
+    </script>
 </main>
 {% endblock content %}

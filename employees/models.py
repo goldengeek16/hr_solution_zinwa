@@ -52,6 +52,33 @@ class EmployeeDetailsPermanent(models.Model):
         return f"{self.first_name} {self.surname} {self.ec_number}"
 
 
+#---------------------DOCUMENTS------------------------------
+class EmployeeDocument(models.Model):
+    DOCUMENT_TYPES = [
+        ('BIRTH_CERTIFICATE', 'Birth Certificate'),
+        ('COPY_OF_ID', 'Copy of ID'),
+        ('POLICE_CLEARANCE', 'Police Clearance'),
+        ('ACADEMIC', 'Academic Document'),
+        ('OTHER', 'Other'),
+    ]
+
+    employee = models.ForeignKey(
+        EmployeeDetailsPermanent,
+        on_delete=models.CASCADE,
+        related_name='employee_documents'
+    )
+    document_type = models.CharField(max_length=50, choices=DOCUMENT_TYPES)
+    certificate_name = models.CharField(max_length=150, blank=True, null=True)
+    document_file = models.FileField(upload_to='employee_documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.document_type == 'ACADEMIC' and self.certificate_name:
+            return self.certificate_name
+
+        return self.get_document_type_display()
+
+
 
 
 class EmployeeDetailsContract(models.Model):

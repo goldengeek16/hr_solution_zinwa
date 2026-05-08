@@ -68,7 +68,7 @@ body {
 
 .form-label.required::after {
   content: " *";
-  color: #dc3545;
+  color: #baacad;
 }
 
 /* Form inputs */
@@ -156,7 +156,7 @@ body {
 /* Validation states */
 .form-input:invalid:not(:focus):not(:placeholder-shown),
 .form-select:invalid:not(:focus) {
-  border-color: #dc3545;
+  border-color: #ab999a;
 }
 
 .form-input:valid:not(:focus):not(:placeholder-shown),

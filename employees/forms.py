@@ -1,6 +1,6 @@
 from django import forms
-from .models import EmployeeDetailsPermanent, SpousesPermanent
-from django.forms import ModelForm, widgets
+from .models import EmployeeDetailsPermanent, SpousesPermanent, EmployeeDocument
+from django.forms import ModelForm, modelformset_factory, widgets
 
 
 
@@ -32,7 +32,7 @@ class PermanentEmployeesForm(ModelForm):
             'date_of_appointment',
             'current_position',
             'department',
-            'documents',
+            # 'documents',
             'catchment',
             'grade',
             'pension_fund',
@@ -59,6 +59,29 @@ class PermanentEmployeesForm(ModelForm):
                 field.widget.attrs.update({'class': 'form-textarea'})
             elif name not in ['date_of_birth', 'date_of_appointment']:
                 field.widget.attrs.update({'class': 'form-input'})
+
+
+class EmployeeDocumentForm(ModelForm):
+    class Meta:
+        model = EmployeeDocument
+        fields = ['document_type', 'certificate_name', 'document_file']
+
+        widgets = {
+            'document_type': forms.Select(attrs={'class': 'form-select document-type'}),
+            'certificate_name': forms.TextInput(attrs={
+                'class': 'form-input',
+                'placeholder': 'Example: Diploma in HR, Degree Certificate'
+            }),
+            'document_file': forms.FileInput(attrs={'class': 'form-input'}),
+        }
+
+
+EmployeeDocumentFormSet = modelformset_factory(
+    EmployeeDocument,
+    form=EmployeeDocumentForm,
+    extra=1,
+    can_delete=True
+)
 
 class SpousePermanentForm(forms.ModelForm):
     class Meta:
