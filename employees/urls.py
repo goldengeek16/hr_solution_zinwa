@@ -14,5 +14,8 @@ urlpatterns = [
     path('spouse-edit/<str:pk>/' ,views.editSpouseView , name='spouse-edit'),
     path('delete-spouse/<str:pk>/', views.deleteSpouseView, name='delete-spouse'),
     path('permanent-employee-kin', views.nextOfKinViewTable, name='permanent-employee-kin'),
-    path('permanent-employee-kin-view/<str:pk>/', views.nextOfKinView, name='permanent-employee-kin-view')
+    path('permanent-employee-kin-view/<str:pk>/', views.nextOfKinView, name='permanent-employee-kin-view'),
+    
+    
+    path('export-pdf/<str:pk>/' ,views.export_pdf, name='export-pdf'),
 ]

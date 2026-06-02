@@ -4,6 +4,8 @@ from .forms import EmployeeDocumentFormSet, PermanentEmployeesForm , SpousePerma
 from django.db.models import Count
 import uuid 
 
+from django.http import HttpResponse 
+
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -283,3 +285,32 @@ def nextOfKinView(request,pk):
     context = {'nextofkin_view':nextofkin_view}
     
     return render(request, 'employees/next_of_kin_view.html', context)
+
+
+#-----------------------------------EXPORT PDF-------
+import datetime 
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
+from django.db.models import Sum 
+
+
+def export_pdf (request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=Employees' + \
+        str(datetime.datetime.now() + '.pdf')
+    response ['Content-Transfer-Ecoding'] = 'binary'
+    
+    html_string = render_to_string('templates/pdf-output.html', {'employees':[]})
+    html = HTML(string=html_string)
+    
+    result = html.write_pdf()
+    
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        
+        output=open(output.name, 'rb')
+        response.write(output.read())
+        
+    return response 

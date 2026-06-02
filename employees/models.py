@@ -1,18 +1,19 @@
 from django.db import models
 import uuid
 
+
 # Create your models here.
 
 
 #---------------------Permanent------------------------------
 class EmployeeDetailsPermanent(models.Model):
     ec_number = models.CharField(max_length=15, unique=True)
-    first_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100 )
     surname = models.CharField(max_length=100)
     gender = models.CharField(max_length=100, choices=[
         ('MALE', 'MALE'),
         ('FEMALE', 'FEMALE'),
-    ])
+    ] )
     title = models.CharField(max_length=100, choices=[
         ('Mr', 'Mr'),
         ('Mrs', 'Mrs'),
@@ -50,6 +51,8 @@ class EmployeeDetailsPermanent(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.surname} {self.ec_number}"
+    
+   
 
 
 #---------------------DOCUMENTS------------------------------
