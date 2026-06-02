@@ -12,10 +12,10 @@
     <section class="profile-page">
         <div class="profile-topbar">
             <div class="profile-title">
-                <h3>Employee Profile</h3>
+                <h3>Contract Employee Profile</h3>
             </div>
 
-            <a href="{% url 'edit-permanent-employee' employee.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'edit-contract-employee' employee.id %}" class="edit-btn">Edit</a>
         </div>
 
         <div class="profile-summary">
@@ -62,8 +62,6 @@
                 <div class="detail-item"><span>Current Position</span><strong>{{ employee.current_position }}</strong></div>
                 <div class="detail-item"><span>Grade</span><strong>{{ employee.grade }}</strong></div>
                 <div class="detail-item"><span>Status</span><strong>{{ employee.get_status_display }}</strong></div>
-                <div class="detail-item"><span>Pension Fund</span><strong>{{ employee.pension_fund }}</strong></div>
-                <div class="detail-item"><span>NSSA Number</span><strong>{{ employee.nssa_number|default:"N/A" }}</strong></div>
                 <div class="detail-item"><span>Station Cell</span><strong>{{ employee.station_cell|default:"N/A" }}</strong></div>
                 <div class="detail-item full-width">
                     <span>Department</span>
@@ -81,66 +79,60 @@
     </section>
 
     <div class="details-section">
-    <div class="section-label">Documents</div>
+        <div class="section-label">Documents</div>
 
-    <div class="documents-list">
-        {% for document in documents %}
-        <div class="document-item">
-            <div>
-                <strong>{{ document.get_document_type_display }}</strong>
-                {% if document.certificate_name %}
-                <span>{{ document.certificate_name }}</span>
-                {% endif %}
+        <div class="documents-list">
+            {% for document in documents %}
+            <div class="document-item">
+                <div>
+                    <strong>{{ document.get_document_type_display }}</strong>
+                    {% if document.certificate_name %}
+                    <span>{{ document.certificate_name }}</span>
+                    {% endif %}
+                </div>
+
+                <a href="{{ document.document_file.url }}" target="_blank" class="document-link">
+                    View Document
+                </a>
             </div>
+            {% empty %}
+            <p class="muted-text">No documents attached.</p>
+            {% endfor %}
+        </div>
+    </div>
 
-            <a href="{{ document.document_file.url }}" target="_blank" class="document-link">
-                View Document
-            </a>
+    <div class="details-section">
+        <div class="section-label">Spouse Details</div>
+
+        {% for spouse in spouses %}
+        <div class="details-grid record-grid">
+            <div class="detail-item"><span>Name</span><strong>{{ spouse.first_name }} {{ spouse.surname }}</strong></div>
+            <div class="detail-item"><span>ID Number</span><strong>{{ spouse.id_number }}</strong></div>
+            <div class="detail-item"><span>Occupation</span><strong>{{ spouse.occupation }}</strong></div>
+            <div class="detail-item"><span>Cell Number</span><strong>{{ spouse.cell_number }}</strong></div>
+            <div class="detail-item"><span>Date of Marriage</span><strong>{{ spouse.date_of_marriage }}</strong></div>
+            <div class="detail-item"><span>Actions</span><strong class="inline-actions"><a href="{% url 'contract-spouse-view' spouse.id %}">View</a><a href="{% url 'contract-spouse-edit' spouse.id %}">Edit</a></strong></div>
+            <div class="detail-item full-width"><span>Home Address</span><strong>{{ spouse.home_address }}</strong></div>
         </div>
         {% empty %}
-        <p class="muted-text">No documents attached.</p>
+        <p class="muted-text">No spouse details added.</p>
         {% endfor %}
     </div>
-</div>
 
-<div class="details-section">
-    <div class="section-label">Spouse Details</div>
+    <div class="details-section">
+        <div class="section-label">Next of Kin Details</div>
 
-    {% for spouse in spouses %}
-    <div class="details-grid">
-        <div class="detail-item"><span>Name</span><strong>{{ spouse.first_name }} {{ spouse.surname }}</strong></div>
-        <div class="detail-item"><span>ID Number</span><strong>{{ spouse.id_number }}</strong></div>
-        <div class="detail-item"><span>Occupation</span><strong>{{ spouse.occupation }}</strong></div>
-        <div class="detail-item"><span>Cell Number</span><strong>{{ spouse.cell_number }}</strong></div>
-        <div class="detail-item"><span>Date of Marriage</span><strong>{{ spouse.date_of_marriage }}</strong></div>
-        <div class="detail-item full-width"><span>Home Address</span><strong>{{ spouse.home_address }}</strong></div>
-    </div>
-    {% empty %}
-    <p class="muted-text">No spouse details added.</p>
-    {% endfor %}
-</div>
-
-<div class="details-section">
-    <div class="section-label">Next of Kin Details</div>
-
-    {% for kin in nextofkins %}
-    <div class="details-grid record-grid">
-        <div class="detail-item"><span>Name</span><strong>{{ kin.first_name }} {{ kin.surname }}</strong></div>
-        <div class="detail-item"><span>ID Number</span><strong>{{ kin.id_number }}</strong></div>
-        <div class="detail-item"><span>Relationship</span><strong>{{ kin.relationship }}</strong></div>
-        <div class="detail-item"><span>Contact</span><strong>{{ kin.contact }}</strong></div>
-        <div class="detail-item">
-            <span>Actions</span>
-            <strong class="inline-actions">
-                <a href="{% url 'permanent-employee-kin-view' kin.id %}">View</a>
-                <a href="{% url 'edit-next-of-kin' kin.id %}">Edit</a>
-            </strong>
+        {% for kin in nextofkins %}
+        <div class="details-grid record-grid">
+            <div class="detail-item"><span>Name</span><strong>{{ kin.first_name }} {{ kin.surname }}</strong></div>
+            <div class="detail-item"><span>ID Number</span><strong>{{ kin.id_number }}</strong></div>
+            <div class="detail-item"><span>Relationship</span><strong>{{ kin.relationship }}</strong></div>
+            <div class="detail-item"><span>Contact</span><strong>{{ kin.contact }}</strong></div>
+            <div class="detail-item"><span>Actions</span><strong class="inline-actions"><a href="{% url 'contract-employee-kin-view' kin.id %}">View</a><a href="{% url 'edit-contract-next-of-kin' kin.id %}">Edit</a></strong></div>
         </div>
+        {% empty %}
+        <p class="muted-text">No next of kin details added.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p class="muted-text">No next of kin details added.</p>
-    {% endfor %}
-</div>
-
 </main>
 {% endblock content %}

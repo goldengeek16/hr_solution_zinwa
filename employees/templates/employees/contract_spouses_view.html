@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/spouse.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="profile-page">
+        <div class="profile-topbar">
+            <div class="profile-title">
+                <div class="title-icon">ID</div>
+                <h3>Contract Spouse Details</h3>
+            </div>
+
+            <a href="{% url 'contract-spouse-edit' spouse_view.id %}" class="edit-btn">Edit</a>
+        </div>
+
+        <div class="section-label">About</div>
+
+        <div class="profile-summary">
+            <div class="profile-initials">
+                {{ spouse_view.first_name|first }}{{ spouse_view.surname|first }}
+            </div>
+
+            <div class="profile-main-info">
+                <div class="name-row">
+                    <h2>{{ spouse_view.first_name }} {{ spouse_view.surname }}</h2>
+                    <span class="status-badge">Contract</span>
+                </div>
+
+                <p>{{ spouse_view.cell_number }}</p>
+                <p>{{ spouse_view.occupation }}</p>
+                <p>{{ spouse_view.home_address }}</p>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <div class="section-label">Personal Details</div>
+
+            <div class="details-grid">
+                <div class="detail-item"><span>Employee</span><strong>{{ spouse_view.Employee }}</strong></div>
+                <div class="detail-item"><span>First Name</span><strong>{{ spouse_view.first_name }}</strong></div>
+                <div class="detail-item"><span>Surname</span><strong>{{ spouse_view.surname }}</strong></div>
+                <div class="detail-item"><span>ID Number</span><strong>{{ spouse_view.id_number }}</strong></div>
+                <div class="detail-item"><span>Date of Birth</span><strong>{{ spouse_view.date_of_birth }}</strong></div>
+                <div class="detail-item"><span>Date of Marriage</span><strong>{{ spouse_view.date_of_marriage }}</strong></div>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <div class="section-label">Contact & Workplace Details</div>
+
+            <div class="details-grid">
+                <div class="detail-item"><span>Cell Number</span><strong>{{ spouse_view.cell_number }}</strong></div>
+                <div class="detail-item"><span>Occupation</span><strong>{{ spouse_view.occupation }}</strong></div>
+                <div class="detail-item"><span>Workplace Number</span><strong>{{ spouse_view.workplace_number|default:"N/A" }}</strong></div>
+                <div class="detail-item"><span>Workplace Address</span><strong>{{ spouse_view.workplace_address|default:"N/A" }}</strong></div>
+                <div class="detail-item full-width"><span>Home Address</span><strong>{{ spouse_view.home_address }}</strong></div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

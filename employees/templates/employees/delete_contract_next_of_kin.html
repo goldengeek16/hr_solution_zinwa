@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/next_of_kin_delete.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="delete-page">
+        <div class="delete-card">
+
+            <h2>Delete Contract Next of Kin Record?</h2>
+
+            <p>
+                Are you sure you want to delete
+                <strong>{{ nextofkin.first_name }} {{ nextofkin.surname }}</strong>?
+                This action cannot be undone.
+            </p>
+
+            <div class="kin-preview">
+                <span>Employee</span>
+                <strong>{{ nextofkin.Employee|default:"N/A" }}</strong>
+
+                <span>ID Number</span>
+                <strong>{{ nextofkin.id_number }}</strong>
+
+                <span>Relationship</span>
+                <strong>{{ nextofkin.relationship }}</strong>
+            </div>
+
+            <div class="delete-actions">
+                <a href="{% url 'contract-employee-kin' %}" class="cancel-delete-btn">Cancel</a>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="confirm-delete-btn">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

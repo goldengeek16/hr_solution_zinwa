@@ -14,8 +14,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Edit Permanent Employee</h2>
-                <p>{{ employee.title }} {{ employee.first_name }} {{ employee.surname }}</p>
+                <h2 class="card-title">Add Contract Employee</h2>
             </div>
 
             <div class="card-body">
@@ -34,7 +33,7 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Attach Documents</h2>
-                <p>Update existing documents or attach new employee documents.</p>
+                <p>Select the document type and upload the file. For academic documents, enter the certificate name.</p>
             </div>
 
             <div class="card-body">
@@ -43,10 +42,6 @@
                 <div id="document-forms">
                     {% for doc_form in document_formset %}
                     <div class="document-row">
-                        {% for hidden in doc_form.hidden_fields %}
-                            {{ hidden }}
-                        {% endfor %}
-
                         <div class="form-field">
                             <label class="form-label">Document Type</label>
                             {{ doc_form.document_type }}
@@ -81,10 +76,6 @@
 
                 <div id="empty-document-form" style="display: none;">
                     <div class="document-row">
-                        {% for hidden in document_formset.empty_form.hidden_fields %}
-                            {{ hidden }}
-                        {% endfor %}
-
                         <div class="form-field">
                             <label class="form-label">Document Type</label>
                             {{ document_formset.empty_form.document_type }}
@@ -107,7 +98,7 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Spouse Details</h2>
-                <p>Optional. Update this employee's spouse details.</p>
+                <p>Optional. Add spouse details now or later from the contract spouse records page.</p>
             </div>
 
             <div class="card-body">
@@ -126,7 +117,7 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Next of Kin Details</h2>
-                <p>Optional. Update this employee's next of kin details.</p>
+                <p>Optional. Add next of kin details now or later from the contract next-of-kin records page.</p>
             </div>
 
             <div class="card-body">
@@ -143,8 +134,8 @@
         </div>
 
         <div class="form-actions">
-            <a href="{% url 'permanent-employee-table' %}" class="cancel-btn">Cancel</a>
-            <button type="submit" class="save-btn">Save Changes</button>
+            <a href="{% url 'contract-employee-table' %}" class="cancel-btn">Cancel</a>
+            <button type="submit" class="save-btn">Save Employee</button>
         </div>
     </form>
 
