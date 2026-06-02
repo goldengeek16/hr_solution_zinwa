@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/spouses_table.css' %}">
+
+{% include 'navbar.html' %}
+
+<main class="main-content">
+    {% include 'header.html' %}
+
+    <section class="spouses-page">
+        <div class="spouses-header">
+            <div>
+                <h2>Contract Employees' Spouses</h2>
+                <p>Manage contract spouse records.</p>
+            </div>
+
+            <a href="{% url 'add-contract-spouse' %}" class="add-spouse-btn">ADD</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="spouses-table">
+                <thead>
+                    <tr>
+                        <th>Spouse</th>
+                        <th>Employee</th>
+                        <th>Occupation</th>
+                        <th>Date of Marriage</th>
+                        <th>Cell Number</th>
+                        <th>Home Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for spouse in spouses %}
+                    <tr>
+                        <td>
+                            <strong>{{ spouse.first_name }} {{ spouse.surname }}</strong><br>
+                            <span>ID Number: {{ spouse.id_number }}</span>
+                        </td>
+                        <td>{{ spouse.Employee }}</td>
+                        <td>{{ spouse.occupation }}</td>
+                        <td>{{ spouse.date_of_marriage }}</td>
+                        <td>{{ spouse.cell_number }}</td>
+                        <td class="address-cell">{{ spouse.home_address }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{% url 'contract-spouse-view' spouse.id %}" class="action-btn view-btn">View</a>
+                                <a href="{% url 'contract-spouse-edit' spouse.id %}" class="action-btn edit-btn">Edit</a>
+                                <a href="{% url 'delete-contract-spouse' spouse.id %}" class="action-btn delete-btn">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <h3>No contract spouses added yet</h3>
+                                <p>Click ADD to create the first spouse record.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock content %}

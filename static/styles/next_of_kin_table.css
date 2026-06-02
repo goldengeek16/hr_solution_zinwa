@@ -1,11 +1,11 @@
-.employees-page {
+.kin-page {
     background: #fff;
     border-radius: 10px;
     padding: 28px 30px;
     box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
 }
 
-.employees-header {
+.kin-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,20 +13,20 @@
     margin-bottom: 24px;
 }
 
-.employees-header h2 {
+.kin-header h2 {
     margin: 0;
     color: #0f172a;
     font-size: 22px;
     font-weight: 700;
 }
 
-.employees-header p {
+.kin-header p {
     margin: 6px 0 0;
     color: #64748b;
     font-size: 14px;
 }
 
-.add-employee-btn {
+.add-kin-btn {
     background: #0b70b7;
     color: #fff;
     border-radius: 8px;
@@ -41,17 +41,17 @@
     overflow-x: auto;
 }
 
-.employees-table {
+.kin-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 1050px;
+    min-width: 850px;
 }
 
-.employees-table thead {
+.kin-table thead {
     background: #f8fafc;
 }
 
-.employees-table th {
+.kin-table th {
     color: #52677f;
     font-size: 13px;
     font-weight: 800;
@@ -62,7 +62,7 @@
     border-bottom: 1px solid #e2e8f0;
 }
 
-.employees-table td {
+.kin-table td {
     color: #0f172a;
     font-size: 14px;
     padding: 20px;
@@ -70,75 +70,21 @@
     vertical-align: middle;
 }
 
-.employees-table tbody tr:hover {
+.kin-table tbody tr:hover {
     background: #f8fbff;
 }
 
-.employee-name-cell strong,
-.job-cell strong,
-.contact-cell strong {
+.kin-name-cell strong {
     display: block;
     color: #0f172a;
     font-size: 15px;
     margin-bottom: 4px;
 }
 
-.employee-name-cell span,
-.job-cell span,
-.contact-cell span {
+.kin-name-cell span {
     display: block;
     color: #64748b;
     font-size: 13px;
-    line-height: 1.4;
-}
-
-.catchment-badge {
-    display: inline-block;
-    background: #ecfdf5;
-    color: #16a34a;
-    border-radius: 999px;
-    padding: 6px 10px;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.employee-status {
-    display: inline-block;
-    border-radius: 999px;
-    padding: 6px 10px;
-    font-size: 12px;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-.status-active {
-    background: #dcfce7;
-    color: #16a34a;
-}
-
-.status-on_leave {
-    background: #fef3c7;
-    color: #b45309;
-}
-
-.status-retired {
-    background: #eef2ff;
-    color: #4f46e5;
-}
-
-.status-terminated {
-    background: #fee2e2;
-    color: #dc2626;
-}
-
-.status-suspended {
-    background: #f3f4f6;
-    color: #4b5563;
-}
-
-.status-contract_ended {
-    background: #f1f5f9;
-    color: #475569;
 }
 
 .action-buttons {
@@ -183,20 +129,4 @@
 .empty-state p {
     margin: 0;
     color: #64748b;
-}
-
-@media (max-width: 700px) {
-    .employees-page {
-        padding: 22px 18px;
-    }
-
-    .employees-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .add-employee-btn {
-        width: 100%;
-        text-align: center;
-    }
 }

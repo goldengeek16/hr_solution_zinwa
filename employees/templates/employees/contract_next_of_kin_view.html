@@ -13,10 +13,10 @@
         <div class="profile-topbar">
             <div class="profile-title">
                 <div class="title-icon">KIN</div>
-                <h3>Next of Kin Details</h3>
+                <h3>Contract Next of Kin Details</h3>
             </div>
 
-            <a href="{% url 'edit-next-of-kin' nextofkin_view.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'edit-contract-next-of-kin' nextofkin_view.id %}" class="edit-btn">Edit</a>
         </div>
 
         <div class="profile-summary">
@@ -40,35 +40,12 @@
             <div class="section-label">Contact Details</div>
 
             <div class="details-grid">
-                <div class="detail-item">
-                    <span>Employee</span>
-                    <strong>{{ nextofkin_view.Employee|default:"N/A" }}</strong>
-                </div>
-
-                <div class="detail-item">
-                    <span>First Name</span>
-                    <strong>{{ nextofkin_view.first_name }}</strong>
-                </div>
-
-                <div class="detail-item">
-                    <span>Surname</span>
-                    <strong>{{ nextofkin_view.surname }}</strong>
-                </div>
-
-                <div class="detail-item">
-                    <span>ID Number</span>
-                    <strong>{{ nextofkin_view.id_number }}</strong>
-                </div>
-
-                <div class="detail-item">
-                    <span>Relationship</span>
-                    <strong>{{ nextofkin_view.relationship }}</strong>
-                </div>
-
-                <div class="detail-item">
-                    <span>Contact</span>
-                    <strong>{{ nextofkin_view.contact }}</strong>
-                </div>
+                <div class="detail-item"><span>Employee</span><strong>{{ nextofkin_view.Employee|default:"N/A" }}</strong></div>
+                <div class="detail-item"><span>First Name</span><strong>{{ nextofkin_view.first_name }}</strong></div>
+                <div class="detail-item"><span>Surname</span><strong>{{ nextofkin_view.surname }}</strong></div>
+                <div class="detail-item"><span>ID Number</span><strong>{{ nextofkin_view.id_number }}</strong></div>
+                <div class="detail-item"><span>Relationship</span><strong>{{ nextofkin_view.relationship }}</strong></div>
+                <div class="detail-item"><span>Contact</span><strong>{{ nextofkin_view.contact }}</strong></div>
             </div>
         </div>
     </section>

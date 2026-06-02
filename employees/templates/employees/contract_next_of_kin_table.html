@@ -12,13 +12,11 @@
     <section class="kin-page">
         <div class="kin-header">
             <div>
-                <h2>Permanent Employees Next of Kin</h2>
-                <p>View, add, edit and manage next-of-kin records.</p>
+                <h2>Contract Employees Next of Kin</h2>
+                <p>View, add, edit and manage contract next-of-kin records.</p>
             </div>
 
-            <a href="{% url 'add-next-of-kin' %}" class="add-kin-btn">
-                ADD
-            </a>
+            <a href="{% url 'add-contract-next-of-kin' %}" class="add-kin-btn">ADD</a>
         </div>
 
         <div class="table-wrapper">
@@ -37,22 +35,19 @@
                     {% for kin in all_nextofkin %}
                     <tr>
                         <td>{{ kin.Employee|default:"N/A" }}</td>
-
                         <td>
                             <div class="kin-name-cell">
                                 <strong>{{ kin.first_name }} {{ kin.surname }}</strong>
                                 <span>ID Number: {{ kin.id_number }}</span>
                             </div>
                         </td>
-
                         <td>{{ kin.relationship }}</td>
                         <td>{{ kin.contact }}</td>
-
                         <td>
                             <div class="action-buttons">
-                                <a href="{% url 'permanent-employee-kin-view' kin.id %}" class="action-btn view-btn">View</a>
-                                <a href="{% url 'edit-next-of-kin' kin.id %}" class="action-btn edit-btn">Edit</a>
-                                <a href="{% url 'delete-next-of-kin' kin.id %}" class="action-btn delete-btn">Delete</a>
+                                <a href="{% url 'contract-employee-kin-view' kin.id %}" class="action-btn view-btn">View</a>
+                                <a href="{% url 'edit-contract-next-of-kin' kin.id %}" class="action-btn edit-btn">Edit</a>
+                                <a href="{% url 'delete-contract-next-of-kin' kin.id %}" class="action-btn delete-btn">Delete</a>
                             </div>
                         </td>
                     </tr>
@@ -60,7 +55,7 @@
                     <tr>
                         <td colspan="5">
                             <div class="empty-state">
-                                <h3>No next-of-kin records found</h3>
+                                <h3>No contract next-of-kin records found</h3>
                                 <p>Click ADD to create the first record.</p>
                             </div>
                         </td>
