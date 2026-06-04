@@ -6,6 +6,8 @@ from reportlab.lib import colors
 from django.contrib import admin
 from django.http import HttpResponse
 
+
+# ------------------------------ EXPORT TO PDF ------------------------
 @admin.action(description="Download selected items as pdf")
 def download_pdf(self, request, queryset):
     model_name = self.model.__name__
@@ -15,7 +17,7 @@ def download_pdf(self, request, queryset):
     pdf = canvas.Canvas(response, pagesize=letter)
     pdf.setTitle('PDF REPORT')
     
-    headers = [field.verbose_name for field in self.model._meta.fields]
+    headers = [field for field in self.model._meta.fields]
     data = [headers]
     
     for obj in queryset:
